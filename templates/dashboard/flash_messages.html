@@ -1,0 +1,53 @@
+{% extends 'partials/base.html' %}
+
+{% block head %}
+    <title>Messages</title>
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="container">
+    
+    <div class="row">
+
+
+        <div class="col">
+
+            <!-- Messages -->
+            {% for m in messages %}
+            {% if m %}
+            <div class="alert alert-{{ m.tags }}">
+
+                {{ m }}
+
+            </div>
+            {% endif %}
+            {% endfor %}
+        
+            <a href="{% url 'dashboard-flash-messages-delete' 1 0 %}" class="mt-4 btn btn-dark">Delete All</a>
+            <div class="card mt-2">
+
+                <div class="card-header bg-dark text-white">
+                    <h4>Messages</h4>
+                </div>
+
+                {% for i in invoices %}
+                <div class="card-body">
+
+                    <h4>{{ i.invoice }}</h4>
+                    <a href="{% url 'dashboard-flash-messages-delete' i.id 1 %}" class="badge badge-danger">Delete</a>
+
+                </div>
+                {% endfor %}
+        
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+{% endblock %}

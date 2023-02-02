@@ -1,0 +1,70 @@
+<!--Topside-->
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <a href="{% url 'dashboard-flash-messages' %}" class="badge badge-secondary">Click Here</a>
+                </div>
+                <div class="card-body">
+
+                    {% if flash_messages %}
+                    <marquee behavior="" direction="">
+                        <h3 class="my-4">
+                            
+                            {% for m in flash_messages %}
+                                {{m.name}}'s, 
+                            {% endfor %}
+                            Order is out of stock
+                        </h3>
+                    </marquee>
+                    
+                    {% else %}
+                    
+                    <marquee behavior="" direction="">
+                        <h3 class="my-4">Information Section</h3>
+                    </marquee>
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    Control Board
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a class="text-decoration-none text-dark" href="{% url 'dashboard-staff' %}">
+                                <div class="card my-card shadow text-center p-3">
+                                    <h4>Staff <i class="fas fa-users"></i></h4>
+                                    <h3>{{ w_count }}</h3>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a class="text-decoration-none text-dark" href="{% url 'dashboard-product' %}">
+                                <div class="card my-card shadow text-center p-3">
+                                    <h4>Products <i class="fas fa-box"></i></h4>
+                                    <h3>{{ p_count }}</h3>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a class="text-decoration-none text-dark" href="{% url 'dashboard-order' %}">
+                                <div class="card my-card shadow text-center p-3">
+                                    <h4>Orders <i class="fas fa-shipping-fast"></i></h4>
+                                    <h3>{{ o_count }}</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Topside-->

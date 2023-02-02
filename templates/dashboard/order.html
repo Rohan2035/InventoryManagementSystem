@@ -1,0 +1,83 @@
+{% extends 'partials/base.html' %}
+
+{% block head %}
+
+    <title>Orders</title>
+
+{% endblock %}
+
+
+{% block content %}
+
+    {% include 'partials/topnav.html' %}
+
+
+    <!--Table-->
+    <div class="container">
+        <div class="row my-4">
+
+            <div class="col-md-4">
+                
+                <!-- Messages -->
+                {% for m in messages %}
+                {% if m %}
+                <div class="alert alert-{{ m.tags }}">
+
+                    {{ m }}
+
+                </div>
+                {% endif %}
+                {% endfor %}
+                
+
+                <table class="table bg-white">
+                    <thead class="bg-dark">
+                        <tr class="text-white">
+                            <th scope="col">Product</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Ordered Date</th>
+                            <th scope="col">Order by</th>
+                            <th scope="col">Product Dispatch</th>
+                            <th scope="col">Product Delete</th>
+                            <th scope="col">Product Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for order in orders %}
+                        <tr>
+                            <td>{{ order.product.name }}</td>
+                            <td>{{ order.product.category }}</td>
+                            <td>{{ order.quantity }}</td>
+                            <td>{{ order.date }}</td>
+                            <td>
+                                {{ order.staff.username }}
+                            </td>
+
+                            {% if order.out %}
+
+                            <td><a href="{% url 'dashboard-order-dispatch' order.id %}" class="btn btn-warning">Procure & Dispatch</a></td>
+                            
+
+                            {% else %}
+
+                                <td><a href="{% url 'dashboard-order-dispatch' order.id %}" class="btn btn-info">Dispatch</a></td>
+
+                            {% endif %}
+
+                            <td><a href="{% url 'dashboard-order-delete' order.id %}" class="btn btn-danger">Delete</a></td>
+                            <td>{{order.product.quantity}}</td>
+
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <!--End Table-->
+
+{% endblock %}
